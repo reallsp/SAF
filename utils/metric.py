@@ -296,7 +296,7 @@ class Loss(nn.Module):
 
         loss = cmpm_loss + cmpc_loss
         loss += lambda_diversity * (
-            self.diversity_loss(img_f) + self.diversity_loss(text_f)
+            self.diversity_loss(img_f[:,1:]) + self.diversity_loss(text_f[:,1:])
         )
         return (
             cmpm_loss,
@@ -330,23 +330,6 @@ class AverageMeter(object):
         self.count += n
         self.avg = self.sum / self.count
 
-
-# def compute_topk(query, gallery, target_query, target_gallery, k=[1, 10], reverse=False):
-#     result = []
-#     query0 = query[0] / query[0].norm(dim=1, keepdim=True)
-#     gallery0 = gallery[0] / gallery[0].norm(dim=1, keepdim=True)
-#     sim_cosine = torch.matmul(query0, gallery0.t())
-#     print(sim_cosine.shape)
-#     score = torch.zeros((sim_cosine.shape))
-#     for i in range(query.size(0)):
-#         query0 = query[i] / query[i].norm(dim=1, keepdim=True)
-#         gallery0 = gallery[i] / gallery[i].norm(dim=1, keepdim=True)
-#         sim_cosine = torch.matmul(query0, gallery0.t())
-#         score+=sim_cosine
-#     result.extend(topk(score, target_gallery, target_query, k, dim=1))
-#     if reverse:
-#         result.extend(topk(score, target_query, target_gallery, k, dim=0))
-#     return result,score
 
 
 def compute_topk(
