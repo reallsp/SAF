@@ -18,5 +18,5 @@ This repo is the official implementation of "[Learning Semantic-Aligned Feature 
 
 Our code is extended from the following repositories. We thank the authors for releasing the codes.
 
-* [NAFS] (https://github.com/TencentYoutuResearch/PersonReID-NAFS)
-* [CMPM+CMPC] (https://github.com/labyrinth7x/Deep-Cross-Modal-Projection-Learning-for-Image-Text-Matching)
+* [NAFS](https://github.com/TencentYoutuResearch/PersonReID-NAFS)
+* [CMPM+CMPC](https://github.com/labyrinth7x/Deep-Cross-Modal-Projection-Learning-for-Image-Text-Matching)
