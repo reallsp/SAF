@@ -4,7 +4,10 @@ from .bert import Bert
 import torchvision.models as models
 import torch
 import os
+import cv2
 import math
+from .bi_lstm import BiLSTM
+import torch.nn.functional as F
 import pickle
 import numpy as np
 from .modeling import VisionTransformer, CONFIGS
@@ -112,16 +115,22 @@ def weights_init_kaiming(m):
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
-        if args.img_model == "vit":
+                if args.img_model == "vit":
             config = CONFIGS[args.model_type]
             self.image_model = VisionTransformer(config)
             self.image_model.load_from(np.load(args.pretrain_dir))
             self.language_model = Bert()
             inp_size = 768
-
+        elif args.img_model == "resnet50":
+            self.image_model = resnet50(pretrained=True)
+            inp_size = 2048
         if args.text_model == "bert":
             self.language_model = Bert()
             text_size = 768
+        elif args.text_model == "bilstm":
+            self.language_model = BiLSTM(args)
+            self.language_model.apply(self.language_model.weight_init)
+            text_size = 1024
 
         self.block = Block(
             dim=768,
