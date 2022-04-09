@@ -6,7 +6,7 @@ BASE_ROOT=/home/lishiping
 ANNO_DIR=$BASE_ROOT/cuhkpedes/processed_data
 text_model='bert'
 CKPT_DIR=$BASE_ROOT/checkpoints/data/model_data
-LOG_DIR=$BASE_ROOT/PersonReID-NAFS/data/logs
+LOG_DIR=$BASE_ROOT/data/logs
 image_model='vit'
 pretrain_dir=$BASE_ROOT/pretrained_models/imagenet21k+imagenet2012_ViT-B_16.npz
 
@@ -17,7 +17,7 @@ lr_decay_ratio=0.9
 epoches_decay=20_30_40
 diversity_lambda=0.3
 
-python $BASE_ROOT/PersonReID-NAFS/test.py \
+python $BASE_ROOT/person_search/test.py \
     --log_dir $LOG_DIR/globalandpart\
     --model_path $CKPT_DIR/globalandpart \
     --image_dir $IMAGE_DIR \
