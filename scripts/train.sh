@@ -1,25 +1,23 @@
 GPUS=5,4,6,7
 export CUDA_VISIBLE_DEVICES=$GPUS
 
-IMAGE_DIR=/home/lishiping/cuhkpedes/imgs
-BASE_ROOT=/home/lishiping
+IMAGE_DIR=../
+BASE_ROOT=/home/lishiping/
 ANNO_DIR=$BASE_ROOT/cuhkpedes/processed_data
 text_model='bert'
 CKPT_DIR=$BASE_ROOT/checkpoints/data/model_data
-LOG_DIR=$BASE_ROOT/data/logs
+LOG_DIR=$BASE_ROOT/Person_search/data/logs
 image_model='vit'
 pretrain_dir=$BASE_ROOT/pretrained_models/imagenet21k+imagenet2012_ViT-B_16.npz
-resnet50_dir=/home/lishiping/pretrained_models/resnet50-19c8e357.pth
 lr=0.0003
 num_epoches=60
 batch_size=64
 lr_decay_ratio=0.9
 epoches_decay=20_30_40
 diversity_lambda=0.2
-Layer_ids=-1
 num_classes=11003
 
-python $BASE_ROOT/person_search/train.py \
+python $BASE_ROOT/PersonReID-NAFS/train.py \
     --CMPC \
     --CMPM \
     --img_model $image_model \
