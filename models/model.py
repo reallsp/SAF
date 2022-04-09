@@ -115,7 +115,7 @@ def weights_init_kaiming(m):
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
-                if args.img_model == "vit":
+        if args.img_model == "vit":
             config = CONFIGS[args.model_type]
             self.image_model = VisionTransformer(config)
             self.image_model.load_from(np.load(args.pretrain_dir))
