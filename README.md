@@ -1,7 +1,7 @@
 This repo is the official implementation of "[Learning Semantic-Aligned Feature Representation for Text-based Person Search](https://arxiv.org/abs/2112.06714)" in PyTorch.
 ### Dependencies
 * Python 3.7
-* Pytorch 1.0.0 & torchvision 0.2.1
+* Pytorch 1.8.1 & torchvision 0.9.1
 * numpy
 * scipy 1.2.1 
 * pytorch_transformers
