@@ -6,7 +6,7 @@ BASE_ROOT=/home/lishiping
 ANNO_DIR=$BASE_ROOT/cuhkpedes/processed_data
 text_model='bert'
 CKPT_DIR=$BASE_ROOT/checkpoints/data/model_data
-LOG_DIR=$BASE_ROOT/PersonReID-NAFS/data/logs
+LOG_DIR=$BASE_ROOT/data/logs
 image_model='vit'
 pretrain_dir=$BASE_ROOT/pretrained_models/imagenet21k+imagenet2012_ViT-B_16.npz
 resnet50_dir=/home/lishiping/pretrained_models/resnet50-19c8e357.pth
@@ -19,7 +19,7 @@ diversity_lambda=0.2
 Layer_ids=-1
 num_classes=11003
 
-python $BASE_ROOT/PersonReID-NAFS/train.py \
+python $BASE_ROOT/person_search/train.py \
     --CMPC \
     --CMPM \
     --img_model $image_model \
@@ -34,7 +34,6 @@ python $BASE_ROOT/PersonReID-NAFS/train.py \
     --gpus $GPUS \
     --num_epoches $num_epoches \
     --lr $lr \
-    --layer_ids $Layer_ids \
     --lambda_diversity $diversity_lambda \
     --lr_decay_ratio $lr_decay_ratio \
     --epoches_decay ${epoches_decay} \
