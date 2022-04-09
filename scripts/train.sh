@@ -17,7 +17,7 @@ epoches_decay=20_30_40
 diversity_lambda=0.2
 num_classes=11003
 
-python $BASE_ROOT/PersonReID-NAFS/train.py \
+python $BASE_ROOT/person_search_/train.py \
     --CMPC \
     --CMPM \
     --img_model $image_model \
