@@ -3,7 +3,6 @@ This repo is the official implementation of "[Learning Semantic-Aligned Feature 
 * Python 3.7
 * Pytorch 1.0.0 & torchvision 0.2.1
 * numpy
-* matplotlib (not necessary unless the need for the result figure)  
 * scipy 1.2.1 
 * pytorch_transformers
 ## Usage
