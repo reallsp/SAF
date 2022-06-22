@@ -336,8 +336,8 @@ def compute_topk(
     query, gallery, target_query, target_gallery, k=[1, 10], reverse=False
 ):
     result = []
-    test_query = query.reshape(query.size(0), -1)
-    test_gallery = gallery.reshape(gallery.size(0), -1)
+    test_query = query.reshape(query.size(1), -1)
+    test_gallery = gallery.reshape(gallery.size(1), -1)
     query_norm = test_query / test_query.norm(dim=1, keepdim=True)
     gallery_norm = test_gallery / test_gallery.norm(dim=1, keepdim=True)
     score = torch.matmul(query_norm, gallery_norm.t())
