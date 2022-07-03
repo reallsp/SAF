@@ -336,15 +336,20 @@ def compute_topk(
     query, gallery, target_query, target_gallery, k=[1, 10], reverse=False
 ):
     result = []
-    test_query = query.reshape(query.size(1), -1)
-    test_gallery = gallery.reshape(gallery.size(1), -1)
-    query_norm = test_query / test_query.norm(dim=1, keepdim=True)
-    gallery_norm = test_gallery / test_gallery.norm(dim=1, keepdim=True)
-    score = torch.matmul(query_norm, gallery_norm.t())
+    query0 = query[:,0] / query[:,0].norm(dim=1, keepdim=True)
+    gallery0 = gallery[:,0] / gallery[:,0].norm(dim=1, keepdim=True)
+    sim_cosine = torch.matmul(query0, gallery0.t())
+    score = torch.zeros((sim_cosine.shape))
+    for i in range(query.size(1)):
+        query0 = query[:,i] / query[:,i].norm(dim=1, keepdim=True)
+        gallery0 = gallery[:,i] / gallery[:,i].norm(dim=1, keepdim=True)
+        sim_cosine = torch.matmul(query0, gallery0.t())
+        score+=sim_cosine
     result.extend(topk(score, target_gallery, target_query, k, dim=1))
     if reverse:
         result.extend(topk(score, target_query, target_gallery, k, dim=0))
     return result, score
+
 
 
 def topk(sim, target_gallery, target_query, k=[1, 10], dim=1):
