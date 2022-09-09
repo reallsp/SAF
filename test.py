@@ -28,8 +28,8 @@ def test(data_loader, network, args, unique_image, epoch=0):
     # switch to evaluate mode
     network.eval()
     max_size = 6156
-    img_feat_bank = torch.zeros(args.num_heads + 1, max_size, args.feature_size)
-    text_feat_bank = torch.zeros(args.num_heads + 1, max_size, args.feature_size)
+    img_feat_bank = torch.zeros( max_size,args.num_heads + 1, args.feature_size)
+    text_feat_bank = torch.zeros( max_size,args.num_heads + 1, args.feature_size)
     labels_bank = torch.zeros(max_size)
     index = 0
     with torch.no_grad():
@@ -52,17 +52,17 @@ def test(data_loader, network, args, unique_image, epoch=0):
             img_output, text_output, image_attn, text_attn, img_f, text_f = network(
                 images, tokens, segments, input_masks
             )
-            for i in range(len(img_output)):
-                img_feat_bank[i][index : index + interval] = img_output[i]
-                text_feat_bank[i][index : index + interval] = text_output[i]
+            
+            img_feat_bank[index : index + interval] = img_f
+            text_feat_bank[index : index + interval] = text_f
             labels_bank[index : index + interval] = labels
             batch_time.update(time.time() - end)
             end = time.time()
             index = index + interval
         unique_image = torch.tensor(unique_image) == 1
-
+        
         result, score = compute_topk(
-            img_feat_bank[:, unique_image, :],
+            img_feat_bank[unique_image],
             text_feat_bank,
             labels_bank[unique_image],
             labels_bank,
